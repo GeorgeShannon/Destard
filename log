@@ -1,0 +1,60 @@
+2-10-2014
+
+Added some mouse features, allowing the player to click on a visible tile and path there.  Nice!  Really should consider
+any explored tile as pathable, I guess...
+
+I just realized that it'll be pretty detailed to include dungeon features with detailed interactions.  Right now I'm
+adding 'level features' to a map so that the map generator can actually place objects as designed in roommaking.  At the
+moment it's only collecting the features into a dictionary (my thought is that interacting with tiles - bumping into
+them - elicits a check against this dictionary to see if anything interesting happens there.
+
+Some features are a step-on-a-tile, though.  Would all movement check this dictionary?  Presumably.
+
+
+1-31-2014
+
+The map generation now integrates elements from the roommaking setup into the map.  Pretty cool!  Unfortunately the
+maps don't quite feel right, and that might just be because some areas are too big, or I might need a bigger map with
+more smoothing.
+
+Regardless, I think I need a break from that part, and might work on two areas - input so the player can click and path
+to a destination (if an explored path is available) or monsters.  I will need some rough AI and some map differences if
+I want grues to have bolt-holes.
+
+
+
+1-27-2014
+
+The debug function works okay and clarified some things about map generation.  I will keep it around!
+
+The roommaking functions are coming along.  ASCII-Paint is pretty nice (the bio fork or whatever).  I have a few temple
+complexes for grabbing rooms from.  Right now the rooms are just a dictionary with a key and a layout using ''' tags.
+Presumably the mapmaking functions can randomly pick from the dict, keeping track of what's been grabbed, and build a
+room using that information.
+
+1-20-2014
+
+So I started making, basically, debug functions.  Tiles have a debug property, and are highlit if something is odd.  In
+this case, it was the tiles that are 'drilled' when connecting caverns.  Sure enough, the two tiles that always
+disappear are being drilled for blocking separate caverns.  This could be solved with checking diagonal movement, but I
+would hate to 'hide' caverns using diagonals.  For now I'll keep a note that says furniture sets can't have diagonally
+- only accessed tiles.
+
+Game object has a debug boolean with it now.
+
+1-19-2014
+
+Given the weirdness with dark walls vs slightly more dark floors, it would be nice to have some tiles in use,
+ particularly since this should be easy with libtcod.  Right now we don't need much but it seems like a pain to redo
+  the whole tileset when I need more graphics.  Then again maybe this wouldn't be too difficult if I keep up with it in
+   Paint.  Really should just give it a try, and expand the current tileset.  QUESTION - does this ruin the color
+    features of tile drawing?
+
+Walls now use the 'block' character from the tileset.  This is just a dithered block but it actually looks half-decent.
+  Nice!
+
+Need to build up the room generation for map generation.  Typically these are just empty rectangles, but there's no
+ reason these elements couldn't be the pre-made rooms - we just need some kind of loop that checks the created elements
+  and turns them into goodies, furniture, etc...
+
+First, though, need to be able to work with permanent tiles on the map - otherwise, the scenery gets chewed up!
