@@ -20,7 +20,7 @@ class Leaf:
             if random.randrange(0,1) == 1:
                 return "vertical"
             else:
-                return "horizontal"
+                return "horizontallllll"
 
         if self.w > self.h:
             return "vertical"
