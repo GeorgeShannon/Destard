@@ -20,12 +20,21 @@ class Leaf:
             if random.randrange(0,1) == 1:
                 return "vertical"
             else:
-                return "horizontallllll"
+                return "horizontal"
 
         if self.w > self.h:
             return "vertical"
         else:
             return "horizontal"
+
+    def gatherleaves(self):
+        collection = []
+        if self.children:
+            for kid in self.children:
+                kid.gatherleaves
+        else:
+           collection.append(self)
+
 
 
 def branch(tree, trunk):
