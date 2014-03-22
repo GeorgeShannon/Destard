@@ -1,4 +1,5 @@
 import random
+import bspmaking
 # Note that the map generation can't deal with diagonally isolated tiles!  All tiles should have a free path in one of
 #   cardinal directions.
 #
@@ -21,47 +22,10 @@ def measurements(layout):
     return x,y
 
 def Make_chamberset(map, x,y,w,h):
+    core = bspmaking.Leaf(x,y,w,h)
 
-    if w<6 or h<6:
-        print "Chamberset too small.  Aborting creation."
-
-    passes = random.randrange(1,min(w/3,h/3))
-
-    # How should I do this?  Actually one way would be to just keep track of the division values - first pass gives the
-    # first division, then the second pass gives two values...
-
-    # First gives the line of division between A and B (x<MAX and >0.).  Second gives AA, AB, BA, and BB, and thus, two
-    # more x or y
-
-    for m in range(x, x+w):
-        for n in range(y, y+h):
-            if (m==x or m==x+w) or (n==y or n==y+h):
-                map[m][n].permanent = True
-                map[m][n].blocked = True
-                map[m][n].block_sight = True
-            else:
-                map[m][n].permanent = True
-                map[m][n].blocked = False
-                map[m][n].block_sight = False
-
-    passnum = 0
-    alignment = "horizontal"
-    while passnum <= passes:
-
-        if random.randrange(0,1)==1:
-            division = random.randrange(x+3,x+w-3)
-            alignment = "horizontal"
-        else:
-            division = random.randrange(y+3,y+h-3)
-            alignment = "vertical"
-
-        for i in range()
-
-        passnum += 1
-
-    if passes >= 1: firstpass = random.randrange(x+3,x+w-3)
-    if passes >= 2: secondpass = (random.randrange(y+3,y+h-3),random.randrange(y+3,y+h-3))
-    if passes >= 3: thirdpass = (random.rangerange(x+3,firstpass-3),random.rangerange(firstpass+3,x+w-3),random.randrange(x+3,firstpass-3),random.rangerange(firstpass+3,x+w-3))
+    while True:
+        bspmaking.Leaf(x,y,w,h)
 
 
 #
