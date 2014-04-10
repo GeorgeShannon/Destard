@@ -1,5 +1,6 @@
 import random
 
+
 class Leaf:
     def __init__(self, x, y, w, h):
         self.x = x
@@ -14,10 +15,9 @@ class Leaf:
         else:
             return False
 
-
     def splitorientation(self):
         if self.w == self.h:
-            if random.randrange(0,1) == 1:
+            if random.randrange(0, 1) == 1:
                 return "vertical"
             else:
                 return "horizontal"
@@ -31,25 +31,25 @@ class Leaf:
         collection = []
         if self.children:
             for kid in self.children:
-                kid.gatherleaves
+                kid.gatherleaves()
         else:
-           collection.append(self)
+            collection.append(self)
+        return collection
 
+    def branch(self):
+        if not self.sizecheck:
+            print "Minimum size."
+            return
 
-
-def branch(tree, trunk):
-    if not trunk.sizecheck:
-        return "minimum"
-
-    if trunk.splitorientation == "vertical":
-        splitpos = random.randrange(3, trunk.h - 3)
-        upperleaf = Leaf(trunk.x, trunk.y, trunk.w, splitpos)
-        lowerleaf = Leaf(trunk.x, trunk.y+splitpos+1, trunk.w, trunk.h-splitpos-1)
-        tree.children.append(upperleaf)
-        tree.children.append(lowerleaf)
-    else:
-        splitpos = random.randrange(3, trunk.w - 3)
-        leftleaf = Leaf(trunk.x, trunk.y, splitpos, trunk.h)
-        rightleaf = Leaf(trunk.x+splitpos+1, trunk.y, trunk.w-splitpos-1, trunk.h)
-        tree.children.append(leftleaf)
-        tree.children.append(rightleaf)
+        if self.splitorientation() == "vertical":
+            splitpos = random.randrange(3, self.h - 3)
+            upperleaf = Leaf(self.x, self.y, self.w, splitpos)
+            lowerleaf = Leaf(self.x, self.y+splitpos+1, self.w, self.h-splitpos-1)
+            self.children.append(upperleaf)
+            self.children.append(lowerleaf)
+        else:
+            splitpos = random.randrange(3, self.w - 3)
+            leftleaf = Leaf(self.x, self.y, splitpos, self.h)
+            rightleaf = Leaf(self.x+splitpos+1, self.y, self.w-splitpos-1, self.h)
+            self.children.append(leftleaf)
+            self.children.append(rightleaf)

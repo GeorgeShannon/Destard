@@ -1,5 +1,6 @@
 from DisjointSet import DisjointSet
 import roommaking
+import bspmaking
 import random
 
 # Holdover from the cellular automata code... not used anymore.
@@ -209,7 +210,14 @@ class CA_CaveFactory:
                 print self.__leveldata
                 self.__rooms.append(new_room)
                 
-                (new_x, new_y) = new_room.center() ### Previously used for player placement (center of first room)
+                (new_x, new_y) = new_room.center()  # Previously used for player placement (center of first room)
+
+        tree = bspmaking.Leaf(20,20,20,10)
+        tree.branch()
+        leaves = tree.gatherleaves()
+        print leaves
+        for leaf in leaves:
+            print "Leaf:", leaf.w, leaf.y
 
         # Chew out a certain amount of 'noise' for the CA function to work over.
         while open_count > 0:

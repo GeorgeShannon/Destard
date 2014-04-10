@@ -61,6 +61,12 @@ def handle_keys(game):
         elif key.vk == libtcod.KEY_RIGHT:
             dx = 1
 
+        elif key_char in ('1'):
+            game.debug_showexplored = not(game.debug_showexplored)
+
+        elif key_char in ('2'):
+            game.debug_troubletiles = not(game.debug_troubletiles)
+
         # Eventually, need keys for working with inventory and items.
 
         if (dx | dy):

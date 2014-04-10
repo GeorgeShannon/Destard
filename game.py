@@ -64,7 +64,8 @@ class Game:
       self.state = 'playing'
 
       # Debug setting.  Other functions will use this for debug info.  HOPEFULLY
-      self.debug = DEBUG
+      self.debug_showexplored = False
+      self.debug_troubletiles = False
       
    def is_blocked(self, x, y):
       # Check map tile

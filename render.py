@@ -63,12 +63,14 @@ def render_view(game,a,b):
             wall = game.map[x][y].block_sight
 
             if not visible: # If it's not visible, we don't care how well it's lit, just whether it's explored.
-                if game.map[x][y].explored:
+                if game.map[x][y].explored or game.debug_showexplored: # Is it something worth showing?
                     if wall:
                         libtcod.console_set_char_background(game.canvas, x, y, color_dark_wall, libtcod.BKGND_SET)
                         libtcod.console_set_default_foreground(game.canvas, color_dark_ground)
                         libtcod.console_put_char(game.canvas, x, y, libtcod.CHAR_BLOCK2, libtcod.BKGND_NONE)
                     else: libtcod.console_set_char_background(game.canvas, x, y, color_dark_ground, libtcod.BKGND_SET)
+                else: # Otherwise just make that tile black.
+                    libtcod.console_set_char_background(game.canvas, x, y, color_dark_ground, libtcod.BKGND_SET)
             else: # must be visible, let's check on light sources
                 lerpfactor = 0
                 for object in game.objects:
@@ -93,7 +95,8 @@ def render_view(game,a,b):
                 #if wall: libtcod.console_set_char_background(game.canvas, x, y, libtcod.color_lerp(color_light_wall, color_dark_wall, fromplayerdist), libtcod.BKGND_SET)
                 #else: libtcod.console_set_char_background(game.canvas, x, y, libtcod.color_lerp(color_light_ground, color_dark_ground, fromplayerdist), libtcod.BKGND_SET)
 
-    if game.debug:
+    # Draws out tiles that have been flagged as troublesome, for whatever reason (such as carving permanent tiles)
+    if game.debug_troubletiles:
         for c in range(game.width - menu.reserved_width()):
             for d in range(game.height - menu.reserved_height()):
                 x = a + c
