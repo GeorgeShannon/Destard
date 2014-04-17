@@ -31,7 +31,7 @@ class Leaf:
         collection = []
         if self.children:
             for kid in self.children:
-                kid.gatherleaves()
+                collection = collection + kid.gatherleaves()
         else:
             collection.append(self)
         return collection

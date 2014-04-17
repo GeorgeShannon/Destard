@@ -215,7 +215,6 @@ class CA_CaveFactory:
         tree = bspmaking.Leaf(20,20,20,10)
         tree.branch()
         leaves = tree.gatherleaves()
-        print leaves
         for leaf in leaves:
             print "Leaf:", leaf.w, leaf.y
 

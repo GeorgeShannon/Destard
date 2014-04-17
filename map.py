@@ -7,7 +7,7 @@ MAP_WIDTH = 100
 MAP_HEIGHT = 80
 
 def new_caf():
-   caf = CA_CaveFactory(MAP_WIDTH, MAP_HEIGHT, 0.37)
+   caf = CA_CaveFactory(MAP_WIDTH, MAP_HEIGHT, 0.39)
    return caf
    
 def new_map(game, caf):
