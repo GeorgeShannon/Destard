@@ -1,3 +1,12 @@
+5-5-2014
+
+Made the horrible mistake of trying to redo the mapmaking operation.  Good lord what a mess!  Anyway the mapmaking
+operation is pretty long but I should consider it managable or just deal with it.
+
+Right now the CA operation is causing a freeze somewhere.  It may not have been translated right - possible the
+Disjoint set wasn't copied right - right now that should be the main focus - get some rooms working, make the level,
+and make sure all areas are accessible from any other.  WITHOUT destroying tiles I shouldn't.
+
 2-10-2014
 
 Added some mouse features, allowing the player to click on a visible tile and path there.  Nice!  Really should consider

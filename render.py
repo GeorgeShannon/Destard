@@ -8,7 +8,7 @@ FOV_ALGORITHM = 0
 
 color_dark_wall = libtcod.Color(40, 40, 40)
 color_light_wall = libtcod.Color(100, 100, 100)
-color_dark_ground = libtcod.Color(10, 10, 10)
+color_dark_ground = libtcod.Color(20, 20, 20)
 color_light_ground = libtcod.Color(200, 180, 50)
 
 def render_all(game):
