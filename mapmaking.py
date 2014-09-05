@@ -82,6 +82,7 @@ class FullMap:
         self.__ds = DisjointSet()
         self.__up_loc = 0
         self.center_pt = (int(self.__height/2), int(self.__width/2))
+        self.objects = []
         self.gen_map(initial_open)
 
     def gen_map(self, initial_open):
@@ -132,6 +133,8 @@ class FullMap:
                 else:
                     # i.e., no intersections, so paint a room
                     levelmaking.dig_room(self.__map, new_room, itemselection)
+                    roomobjects = levelmaking.collect_features(self.__map, new_room, itemselection)
+                    self.objects += roomobjects
                     print "Successfully dug", new_room.style
                     self.__rooms.append(new_room)
                     placed = True
@@ -143,13 +146,16 @@ class FullMap:
         self.ca_operation(loops)
 
         # Check for other room-making operations
-        pass
+        print self.objects
 
         # Join the areas of the level
         self.__join_rooms()
 
     def finalize_map(self):
         return self.__map
+
+    def finalize_obects(self):
+        return self.objects
 
     def get_rooms(self):
         return self.__rooms
@@ -247,6 +253,7 @@ class FullMap:
                     prev_pt = next_pt
 
         all_caves = self.__determine_areas()
+
 
     def __determine_areas(self):
         # divide the square into equivalence classes

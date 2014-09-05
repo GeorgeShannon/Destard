@@ -11,11 +11,15 @@ def new_level(levelnum):
     level = FullMap(MAP_WIDTH, MAP_HEIGHT, levelnum, 0.42)
     return level
 
-def new_map(game):
+def get_map_from_level(game):
     map = game.level.finalize_map()
     game.map_width = MAP_WIDTH
     game.map_height = MAP_HEIGHT
     return map
+
+def get_objects_from_level(game):
+    objects = game.level.finalize_obects()
+    return objects
    
 #def get_rooms(factory):
  #   rooms = factory.get_rooms()
@@ -39,13 +43,13 @@ def initial_place_player(game):
 
 
 # An FOV map built using a provided map.
-def new_fov_map(game):
-    width = game.map_width
-    height = game.map_height
+def new_fov_map(map):
+    width = MAP_WIDTH
+    height = MAP_HEIGHT
     fov_map = libtcod.map_new(width, height)
     for y in range(height):
         for x in range(width):
-            libtcod.map_set_properties(fov_map, x, y, not game.map[x][y].block_sight, not game.map[x][y].blocked)
+            libtcod.map_set_properties(fov_map, x, y, not map[x][y].block_sight, not map[x][y].blocked)
     return fov_map
 
 

@@ -22,9 +22,6 @@ class Object:
             self.mover.owner = self
 
 
-
-
-
 class Mover():
     def __init__(self):
         self.path = None
@@ -46,7 +43,7 @@ class Mover():
             return 'pathing'
 
 class LightSource():
-    def __init__(self, game, style="torch", mobile=False):
+    def __init__(self, levelmap, style="torch", mobile=False):
         if style == "brazier":
             radius = 20
         else:
@@ -57,15 +54,17 @@ class LightSource():
         self.flickerexponent = 0.8
         self.flicker()
         self.mobile = mobile
-        self.fov_map = map.new_fov_map(game)
+        self.fov_map = map.new_fov_map(levelmap)
 
     def flicker(self):
         if self.style == "brazier" or self.style == "torch":
             flicker_variable = random.uniform(-0.1, 0.1)
-            if self.flickerexponent + flicker_variable > 0.8: self.flickerexponent=0.8
-            elif self.flickerexponent + flicker_variable < 0.5: self.flickerexponent=0.5
-            else: self.flickerexponent += flicker_variable
-
+            if self.flickerexponent + flicker_variable > 0.8:
+                self.flickerexponent = 0.8
+            elif self.flickerexponent + flicker_variable < 0.5:
+                self.flickerexponent = 0.5
+            else:
+                self.flickerexponent += flicker_variable
 
 
 def player_move(game, dx, dy):

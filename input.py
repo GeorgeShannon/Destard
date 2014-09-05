@@ -17,7 +17,8 @@ def handle_keys(game):
     (x, y) = (mousestatus.cx + a, mousestatus.cy + b)
 
     #If the player clicks an acceptable tile, build a path to that location and start pathing toward it.
-    if mousestatus.lbutton_pressed and libtcod.map_is_in_fov(game.fov_map, x, y):
+
+    if mousestatus.lbutton_pressed and game.map[x][y].explored:
         game.state = 'pathing'
         game.player.mover.path = libtcod.path_new_using_map(game.fov_map, 1.41)
         libtcod.path_compute(game.player.mover.path, game.player.x, game.player.y, x, y)

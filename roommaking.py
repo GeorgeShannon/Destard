@@ -86,7 +86,7 @@ XXXXXXX.X.....X.XXXXXXX
 XXXXXXX.........XXXXXXX
 XXXXXXX.X.....X.XXXXXXX
 XXXXXXX.........XXXXXXX
-..........==...........
+.......................
 .X.X.X...........X.X.X.
 .......................
 ...........b...........
@@ -100,7 +100,7 @@ XXXXXXX.........XXXXXXX
 ''',
 
 'layout3': '''
-XXXXXXXXX..XXXXXXXXX
+XXXXXXXXXXXXXXXXXXXX
 XXXXXXXX....XXXXXXXX
 XXXXXX........XXXXXX
 XXXXX..........XXXXX
@@ -110,14 +110,14 @@ XXXXXXXX....XXXXXXXX
 XXXXXXXX....XXXXXXXX
 XXX...XX....XX...XXX
 XX................XX
-....................
+XX................XX
 XX................XX
 XXX...XX....XX...XXX
 XXXXXXXX....XXXXXXXX
 XXXXXXXX....XXXXXXXX
 XXXXXXXX....XXXXXXXX
 XXXXXXX......XXXXXXX
-XXXXXX........XXXXXX
+....................
 ''',
 
 'layout4': '''

@@ -14,6 +14,7 @@ class Game:
         # Console information
         self.width = CONSOLE_WIDTH
         self.height = CONSOLE_HEIGHT
+        self.objects = []
 
         # Font information
         libtcod.console_set_custom_font('dejavu16x16_gs_tc.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
@@ -26,18 +27,18 @@ class Game:
 
         # Map info.  Level is the map construction object.  Maybe this should be generic so that new levels can be built.
         self.level = map.new_level(1)
-        self.map = map.new_map(self)
+        self.map = map.get_map_from_level(self)
+        self.objects = map.get_objects_from_level(self)
         #self.rooms = self.factory.get_rooms(self.map)
 
         # Objects
-        self.objects = []
-        lightsource_component = actors.LightSource(self, "torch", mobile=True)
+        lightsource_component = actors.LightSource(self.map, "torch", mobile=True)
         mover_component = actors.Mover()
         self.player = actors.Object(5, 5, '@', 'player', libtcod.white, blocks=True, lightsource=lightsource_component, mover=mover_component)
         self.objects.append(self.player)
-        lightsource_component = actors.LightSource(self, "brazier")
-        temptorch = actors.Object(14, 12, 'X', 'brazier', libtcod.black, blocks=True, lightsource=lightsource_component)
-        self.objects.append(temptorch)
+        #lightsource_component = actors.LightSource(self, "brazier")
+        #temptorch = actors.Object(14, 12, 'X', 'brazier', libtcod.black, blocks=True, lightsource=lightsource_component)
+        #self.objects.append(temptorch)
 
         map.initial_place_player(self)
         #map.fill_rooms
@@ -52,7 +53,7 @@ class Game:
         # FOV map for rendering purposes.
         self.map_movement = True
         self.map_change = True
-        self.fov_map = map.new_fov_map(self)
+        self.fov_map = map.new_fov_map(self.map)
       
         # Torch info.  Should be replaced with torch object held by player or defaulting to some small value.
         #self.torch_radius = 20

@@ -1,3 +1,13 @@
+6-3-2014
+
+Finally made the map functional with setpiece rooms and functional CA, with no goddamn isolated rooms.  Hooray!  Joining
+of rooms is also done using pathfinding, which avoids the issue of not knowing where to 'dig' to.
+
+Now I am working on level objects like lights and stuff.  This should travel with room setpieces.  I think the level-
+making sequence should keep objects in the level, rather than in the game.  This would clarify which ones need to be
+drawn versus ones held by the player or in other levels.  Right now the levelmaking sequence needs to be cleaned up
+for this, as does the game object!
+
 5-5-2014
 
 Made the horrible mistake of trying to redo the mapmaking operation.  Good lord what a mess!  Anyway the mapmaking

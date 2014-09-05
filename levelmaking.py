@@ -3,6 +3,8 @@
 
 import random
 import roommaking
+import actors
+import libtcodpy as libtcod
 
 
 def choose_levelset(level):
@@ -72,3 +74,19 @@ def dig_room(map, room, layout):
         if char == "\n":
             x = room.x1 + 1
             y += 1
+
+def collect_features(map, room, layout):
+    levelobjects = []
+    # Go through the layout map, determine proper locations, make the right object for attachment to the level.
+    x = room.x1 + 1
+    y = room.y1
+    for char in layout:
+        if char == "b":
+            light = actors.LightSource(map, "brazier")
+            object = actors.Object(x, y, 'x', 'brazier', libtcod.black, blocks=True, lightsource=light)
+            levelobjects.append(object)
+        x += 1
+        if char == "\n":
+            x = room.x1 + 1
+            y += 1
+    return levelobjects

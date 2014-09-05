@@ -10,6 +10,7 @@ color_dark_wall = libtcod.Color(40, 40, 40)
 color_light_wall = libtcod.Color(100, 100, 100)
 color_dark_ground = libtcod.Color(20, 20, 20)
 color_light_ground = libtcod.Color(200, 180, 50)
+color_unexplored = libtcod.Color(10, 10, 20)
 
 def render_all(game):
 
@@ -58,7 +59,8 @@ def render_view(game,a,b):
             x = a + c
             y = b + d
 
-            #We need to check these map locations to see if they are visible to the player, first of all, and if they are, include effects from all light sources.
+            #We need to check these map locations to see if they are visible to the player, first of all, and if they
+            #  are, include effects from all light sources.
             visible = libtcod.map_is_in_fov(game.fov_map, x, y)
             wall = game.map[x][y].block_sight
 
@@ -69,12 +71,13 @@ def render_view(game,a,b):
                         libtcod.console_set_default_foreground(game.canvas, color_dark_ground)
                         libtcod.console_put_char(game.canvas, x, y, libtcod.CHAR_BLOCK2, libtcod.BKGND_NONE)
                     else: libtcod.console_set_char_background(game.canvas, x, y, color_dark_ground, libtcod.BKGND_SET)
-                else: # Otherwise just make that tile black.
-                    libtcod.console_set_char_background(game.canvas, x, y, color_dark_ground, libtcod.BKGND_SET)
+                else: # Otherwise just make that tile the unexplored color.
+                    libtcod.console_set_char_background(game.canvas, x, y, color_unexplored, libtcod.BKGND_SET)
             else: # must be visible, let's check on light sources
                 lerpfactor = 0
                 for object in game.objects:
-                    if object.lightsource and libtcod.map_is_in_fov(object.lightsource.fov_map, x, y): # This checks whether the object is a lightsource and can 'see' the tile in question.
+                     # This checks whether the object is a lightsource and can 'see' the tile in question.
+                    if object.lightsource and libtcod.map_is_in_fov(object.lightsource.fov_map, x, y):
                         distance=math.sqrt((x - object.x)**2 + (y - object.y)**2)
                         if distance <= object.lightsource.radius:
                             lerpfactor += 1-( distance / object.lightsource.radius ) ** object.lightsource.flickerexponent
@@ -104,18 +107,13 @@ def render_view(game,a,b):
                 if game.map[x][y].debug:
                     libtcod.console_set_char_background(game.canvas, x, y, libtcod.dark_purple, libtcod.BKGND_SET)
 
-
-
     # Also need to update the light source change
     #game.torch_flicker_exponent = game.torch_flicker_exponent + random.uniform(-0.1, 0.1)
     #if game.torch_flicker_exponent < 0.5: game.torch_flicker_exponent=0.5
     #if game.torch_flicker_exponent > 1: game.torch_flicker_exponent=1
     for object in game.objects:
-            if object.lightsource: object.lightsource.flicker()
-
-
-
-
+            if object.lightsource:
+                object.lightsource.flicker()
 
 
 def render_objects(game):
