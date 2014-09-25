@@ -1,5 +1,6 @@
 import libtcodpy as libtcod
 import actors
+import map
 
 # These two objects record input and are checked appropriately.
 key = libtcod.Key()
@@ -20,7 +21,8 @@ def handle_keys(game):
 
     if mousestatus.lbutton_pressed and game.map[x][y].explored:
         game.state = 'pathing'
-        game.player.mover.path = libtcod.path_new_using_map(game.fov_map, 1.41)
+        fov_pathing_map = map.new_fov_pathing_map(game.map)
+        game.player.mover.path = libtcod.path_new_using_map(fov_pathing_map, 1.41)
         libtcod.path_compute(game.player.mover.path, game.player.x, game.player.y, x, y)
 
     # Full screen / window switching

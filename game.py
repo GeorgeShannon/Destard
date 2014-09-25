@@ -9,6 +9,7 @@ CONSOLE_HEIGHT = 50
 
 DEBUG = True
 
+
 class Game:
     def __init__(self):
         # Console information
@@ -25,7 +26,7 @@ class Game:
         # Renderer method
         #libtcod.sys_set_renderer(libtcod.RENDERER_SDL)
 
-        # Map info.  Level is the map construction object.  Maybe this should be generic so that new levels can be built.
+        # Map info.  Level is the map construction object - Maybe this should be generic so that new levels can be built.
         self.level = map.new_level(1)
         self.map = map.get_map_from_level(self)
         self.objects = map.get_objects_from_level(self)
@@ -36,12 +37,7 @@ class Game:
         mover_component = actors.Mover()
         self.player = actors.Object(5, 5, '@', 'player', libtcod.white, blocks=True, lightsource=lightsource_component, mover=mover_component)
         self.objects.append(self.player)
-        #lightsource_component = actors.LightSource(self, "brazier")
-        #temptorch = actors.Object(14, 12, 'X', 'brazier', libtcod.black, blocks=True, lightsource=lightsource_component)
-        #self.objects.append(temptorch)
-
         map.initial_place_player(self)
-        #map.fill_rooms
 
         # This is the 'painting' console.  Map height and width are set up by the map gen.
         self.canvas_width = self.map_width
@@ -49,7 +45,7 @@ class Game:
         self.canvas = libtcod.console_new(self.canvas_width, self.canvas_height)
         libtcod.console_set_default_background(self.canvas, libtcod.black)
         libtcod.console_clear(self.canvas)
-      
+
         # FOV map for rendering purposes.
         self.map_movement = True
         self.map_change = True
@@ -66,7 +62,8 @@ class Game:
         # Debug setting.  Other functions will use this for debug info.  HOPEFULLY
         self.debug_showexplored = False
         self.debug_troubletiles = False
-      
+
+
     def is_blocked(self, x, y):
         # Check map tile
         if self.map[x][y].blocked == True:

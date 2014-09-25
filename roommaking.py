@@ -46,16 +46,17 @@ def Make_chamberset(map, x,y,w,h):
 starting = {
 
 'entrance1': '''
-XXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXX
-XXXXXXXXXXXXXXXXXXX
-XXXXXXXXX.XXXXXXXXX
-XXXXXX.......XXXXXX
-XXXX...........XXXX
-XXX..X.......X..XXX
-XX...............XX
-XX...............XX
-...................
+XXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXX
+XXXXXXXX==|==XXXXXXXX
+XXXXXX.........XXXXXX
+XXXXXX.........XXXXXX
+XXXX.............XXXX
+XXXX...X.....X...XXXX
+XXX...............XXX
+XXX...X.......X...XXX
+XX.................XX
 '''
 }
 
@@ -64,21 +65,21 @@ XX...............XX
 templefurniture = {
 
 'layout1': '''
-XXXXXXX
-XX...XX
-X.....X
-X.....X
-X.....X
-X.X.X.X
-X.....X
-X.X.X.X
-X.....X
-X.X.X.X
-X.....X
-XX...XX
-XX...XX
-XX...XX
-XX...XX
+XXXXXXXXXXXXX
+XXXXX&&&XXXXX
+XXXX.....XXXX
+XXX.......XXX
+XX....A....XX
+XX.........XX
+XX..X...X..XX
+X&.........&X
+X&..X...X..&X
+X&.........&X
+XX..X...X..XX
+XX.........XX
+XXX.......XXX
+XXXX.....XXXX
+XXXX.....XXXX
 ''',
 
 'layout2': '''
@@ -117,7 +118,6 @@ XXXXXXXX....XXXXXXXX
 XXXXXXXX....XXXXXXXX
 XXXXXXXX....XXXXXXXX
 XXXXXXX......XXXXXXX
-....................
 ''',
 
 'layout4': '''

@@ -5,7 +5,7 @@ import random
 
 class Object:
     # This is a generic object that can be placed or manipulated.
-    def __init__(self, x, y, char, name, color, blocks=False, lightsource=None, mover=None):
+    def __init__(self, x, y, char, name, color, blocks=False, lightsource=None, mover=None, event=None):
         self.x = x
         self.y = y
         self.char = char
@@ -21,6 +21,15 @@ class Object:
         if self.mover: # Let the mover know who owns it
             self.mover.owner = self
 
+        self.event = event
+        if self.event: # Let the event know who owns it
+            self.event.owner = self
+
+
+class EventObject():
+    def __init__(self, ID):
+        self.ID = ID
+
 
 class Mover():
     def __init__(self):
@@ -30,25 +39,31 @@ class Mover():
         if not game.is_blocked(self.owner.x+dx, self.owner.y+dy):
             self.owner.x += dx
             self.owner.y += dy
+            return 'moved'
         else:
             return 'blocked'
 
-    def takepath(self):
+    def takepath(self, game):
         #libtcod.path_compute(game.player.path, game.player.destination[0], game.player.destination[1], ...)
         if libtcod.path_is_empty(self.path):
             return 'empty'
         else:
-            x,y = libtcod.path_get(self.path, 0)
-            self.owner.x, self.owner.y = libtcod.path_walk(self.path,True)
+            #x,y = libtcod.path_get(self.path, 0)
+            x, y = libtcod.path_walk(self.path, True)
+            if (x, y) == (None, None):
+                return 'empty'
+            self.owner.x, self.owner.y = x, y
+            #if self.move(game, dx, dy) == 'blocked':
+                #return 'empty'
             return 'pathing'
 
 class LightSource():
     def __init__(self, levelmap, style="torch", mobile=False):
         if style == "brazier":
-            radius = 20
+            radius = 12
         else:
             style = "torch"
-            radius = 12
+            radius = 8
         self.style = style
         self.radius = radius
         self.flickerexponent = 0.8

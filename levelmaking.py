@@ -6,7 +6,6 @@ import roommaking
 import actors
 import libtcodpy as libtcod
 
-
 def choose_levelset(level):
 
     levellist=[]
@@ -62,7 +61,7 @@ def dig_room(map, room, layout):
             map[x][y].permanent = False
             map[x][y].blocked = False
             map[x][y].block_sight = False
-        if char == "X":
+        if char == "X" or char == "&":
             map[x][y].permanent = True
             map[x][y].blocked = True
             map[x][y].block_sight = True
@@ -82,9 +81,13 @@ def collect_features(map, room, layout):
     y = room.y1
     for char in layout:
         if char == "b":
-            light = actors.LightSource(map, "brazier")
-            object = actors.Object(x, y, 'x', 'brazier', libtcod.black, blocks=True, lightsource=light)
+            lightpart = actors.LightSource(map, "brazier")
+            object = actors.Object(x, y, 'x', 'brazier', libtcod.black, blocks=True, lightsource=lightpart)
             levelobjects.append(object)
+        #if char == "&":
+            #eventpart = actors.EventObject(1)
+            #object = actors.Object(x, y, '&', 'engraving', libtcod.blue, blocks=True, event=eventpart)
+            #levelobjects.append(object)
         x += 1
         if char == "\n":
             x = room.x1 + 1

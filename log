@@ -1,3 +1,28 @@
+9/22/2014
+
+So I need a good list of events and locations.  Presumably an ID, type, and location (which can be variable and can
+be in multiple locations)
+
+9/14/2014
+
+I'm not sure walking into an area and getting a popup is that nice.  In most cases I think bumping into a tile should
+trigger the event - wall carvings, altars, NPCs, and other stuff would work fine.
+
+What cases might not they?
+- mountain crack (though we can walk up close to trigger?)
+
+I actually can't think of any others.  I guess this means I don't need the kind of event collector I just made.
+
+9/11/2014
+
+Auto-movement with the mouse works the way it should - anywhere explored, without passing through walls (hah).  Moved
+some of the functions around, the game loop controls what should be happening.
+
+So the next topic is event management, the first step of which is identifying which tiles are event areas or not.  So
+far I've added numbers to locations in roommaking, but this seems messy.  Do I need a mask to identify event areas?
+For example, the doors in the entranceway should be something like ==|== but I shouldn't make those tiles unique to the
+entranceway.  The mask would solve that.  Do I want to double up on setpieces, though?
+
 6-3-2014
 
 Finally made the map functional with setpiece rooms and functional CA, with no goddamn isolated rooms.  Hooray!  Joining

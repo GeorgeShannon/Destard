@@ -29,8 +29,8 @@ def get_objects_from_level(game):
 def initial_place_player(game):
     while True:
         rooms = game.level.get_rooms()
-        numrooms = len(game.level.get_rooms())-1
-        #print numrooms
+        numrooms = len(rooms)-1
+        game.level.check_open()
         room = rooms[libtcod.random_get_int(0, 0, numrooms)]
     
         x = libtcod.random_get_int(0, room.x1+1, room.x2-1)
@@ -51,6 +51,17 @@ def new_fov_map(map):
         for x in range(width):
             libtcod.map_set_properties(fov_map, x, y, not map[x][y].block_sight, not map[x][y].blocked)
     return fov_map
+
+
+# This is for pathing - the path should depend on whether the area is explored or not.
+def new_fov_pathing_map(map):
+    width = MAP_WIDTH
+    height = MAP_HEIGHT
+    fov_pathing_map = libtcod.map_new(width, height)
+    for y in range(height):
+        for x in range(width):
+            libtcod.map_set_properties(fov_pathing_map, x, y, not map[x][y].block_sight, (not map[x][y].blocked and map[x][y].explored))
+    return fov_pathing_map
 
 
 # An internal check for whether a map tile is blocked (by a wall)

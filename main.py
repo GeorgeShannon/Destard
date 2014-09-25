@@ -1,4 +1,4 @@
-import libtcodpy as libtcod
+#import libtcodpy as libtcod
 from game import *
 import input
 import render
@@ -8,11 +8,14 @@ def play_game(game):
     while not libtcod.console_is_window_closed():
         render.render_all(game)
 
+        #In the case of pathing, follow the path or switch back to normal playing when done.
         if game.state == 'pathing':
-            if game.player.mover.takepath() == 'empty':
+            if game.player.mover.takepath(game) == 'empty':
                 game.state = 'playing'
             game.map_movement = True
 
+        if game.map_movement:
+            pass # Here we can check to see if player movement has occurred and see if an event should come up.
 
         player_action = input.handle_keys(game)
 

@@ -83,6 +83,7 @@ class FullMap:
         self.__up_loc = 0
         self.center_pt = (int(self.__height/2), int(self.__width/2))
         self.objects = []
+        self.eventdict = {}
         self.gen_map(initial_open)
 
     def gen_map(self, initial_open):
@@ -103,6 +104,9 @@ class FullMap:
 
         # Make a list of level features to make
         levellist = levelmaking.choose_levelset(self.__levelnum)
+
+        # Init a counter for events
+        currentevent = 1
 
         # For each item, get the features to make a Chamber out of.  Make a chamber and dig a proper room out of it.
         for item in levellist:
@@ -146,10 +150,11 @@ class FullMap:
         self.ca_operation(loops)
 
         # Check for other room-making operations
-        print self.objects
+
 
         # Join the areas of the level
         self.__join_rooms()
+        self.check_open()
 
     def finalize_map(self):
         return self.__map
@@ -176,6 +181,15 @@ class FullMap:
                 self.__map[rand_c][rand_r].blocked = False
                 self.__map[rand_c][rand_r].block_sight = False
                 open_count -= 1
+
+    def check_open(self):
+        count = 0
+        for x in range(1, self.__width):
+            for y in range(1, self.__height):
+                if self.__map[x][y].blocked:
+                    count += 1
+        print 'open tiles: ', count
+
 
     def ca_operation(self, loops):
     # For non-permanent tiles, grow or kill depending on their surroundings.

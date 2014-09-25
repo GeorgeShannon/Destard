@@ -44,7 +44,7 @@ def render_view(game,a,b):
         for object in game.objects:
             if object.lightsource:
                 libtcod.map_compute_fov(object.lightsource.fov_map, object.x, object.y, object.lightsource.radius, FOV_LIGHT_WALLS, FOV_ALGORITHM)
-                libtcod.map_compute_fov(game.fov_map, px, py, 40, FOV_LIGHT_WALLS, FOV_ALGORITHM)
+                libtcod.map_compute_fov(game.fov_map, px, py, 30, FOV_LIGHT_WALLS, FOV_ALGORITHM)
     elif game.map_movement:
         for object in game.objects:
             if object.lightsource.mobile:
