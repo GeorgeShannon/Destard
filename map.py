@@ -30,7 +30,6 @@ def initial_place_player(game):
     while True:
         rooms = game.level.get_rooms()
         numrooms = len(rooms)-1
-        game.level.check_open()
         room = rooms[libtcod.random_get_int(0, 0, numrooms)]
     
         x = libtcod.random_get_int(0, room.x1+1, room.x2-1)
@@ -50,6 +49,7 @@ def new_fov_map(map):
     for y in range(height):
         for x in range(width):
             libtcod.map_set_properties(fov_map, x, y, not map[x][y].block_sight, not map[x][y].blocked)
+
     return fov_map
 
 

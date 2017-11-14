@@ -12,3 +12,4 @@ def reserved_width():
 
 def reserved_height():
     return PANEL_HEIGHT
+

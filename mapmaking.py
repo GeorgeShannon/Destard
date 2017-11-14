@@ -146,7 +146,7 @@ class FullMap:
                     (new_x, new_y) = new_room.center()  # Previously used for player placement (center of first room)
 
         # Perform CA operation - how many loops to perform?
-        loops = random.randrange(2, 3)
+        loops = random.randrange(4, 5)
         self.ca_operation(loops)
 
         # Check for other room-making operations
@@ -154,7 +154,6 @@ class FullMap:
 
         # Join the areas of the level
         self.__join_rooms()
-        self.check_open()
 
     def finalize_map(self):
         return self.__map
@@ -222,6 +221,7 @@ class FullMap:
 
         all_caves = self.__determine_areas()
 
+
         # Build a tunneling map for pathing - use the permanent state check to determine passability.
         tunnelingmap = libtcod.map_new(self.__width, self.__height)
         for x in range(1, self.__width-1):
@@ -267,6 +267,8 @@ class FullMap:
                     prev_pt = next_pt
 
         all_caves = self.__determine_areas()
+        if len(all_caves.keys())>1:
+            self.__join_rooms()
 
 
     def __determine_areas(self):
@@ -276,8 +278,19 @@ class FullMap:
                 if not self.__map[c][r].blocked:
                     self.__union_adj_sqr(c, r)
 
-        # Get a list of unaccessible areas to work over.
+        # Get a list of areas to work on, then remove small caves before returning
         areas = self.__ds.split_sets()
+        zones = areas.keys()
+        for zone in zones:
+            if len(areas[zone])<9:
+                for location in areas[zone]:
+                    x = location[0]
+                    y = location[1]
+                    self.__map[x][y].permanent = False
+                    self.__map[x][y].blocked = True
+                    self.__map[x][y].block_sight = True
+                areas.pop(zone)
+
         print "Number of areas is", len(areas)
         return areas
 
@@ -329,4 +342,4 @@ class FullMap:
                     root2 = self.__ds.find(nloc)
 
                     if root1 != root2:
-                        self.__ds.union(root1,root2)
+                        self.__ds.union(root1, root2)

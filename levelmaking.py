@@ -84,10 +84,10 @@ def collect_features(map, room, layout):
             lightpart = actors.LightSource(map, "brazier")
             object = actors.Object(x, y, 'x', 'brazier', libtcod.black, blocks=True, lightsource=lightpart)
             levelobjects.append(object)
-        #if char == "&":
-            #eventpart = actors.EventObject(1)
-            #object = actors.Object(x, y, '&', 'engraving', libtcod.blue, blocks=True, event=eventpart)
-            #levelobjects.append(object)
+        if char == "&":
+            eventpart = actors.EventObject(1)
+            object = actors.Object(x, y, '&', 'engraving', libtcod.black, blocks=True, event=eventpart)
+            levelobjects.append(object)
         x += 1
         if char == "\n":
             x = room.x1 + 1

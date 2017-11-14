@@ -47,7 +47,7 @@ def render_view(game,a,b):
                 libtcod.map_compute_fov(game.fov_map, px, py, 30, FOV_LIGHT_WALLS, FOV_ALGORITHM)
     elif game.map_movement:
         for object in game.objects:
-            if object.lightsource.mobile:
+            if object.lightsource and object.lightsource.mobile:
                 libtcod.map_compute_fov(object.lightsource.fov_map, object.x, object.y, object.lightsource.radius, FOV_LIGHT_WALLS, FOV_ALGORITHM)
                 libtcod.map_compute_fov(game.fov_map, px, py, 40, FOV_LIGHT_WALLS, FOV_ALGORITHM)
 
@@ -106,6 +106,7 @@ def render_view(game,a,b):
                 y = b + d
                 if game.map[x][y].debug:
                     libtcod.console_set_char_background(game.canvas, x, y, libtcod.dark_purple, libtcod.BKGND_SET)
+        #libtcod.console_print(game.canvas, 0,0, "This is a test string")
 
     # Also need to update the light source change
     #game.torch_flicker_exponent = game.torch_flicker_exponent + random.uniform(-0.1, 0.1)

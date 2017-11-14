@@ -18,7 +18,9 @@ class Game:
         self.objects = []
 
         # Font information
-        libtcod.console_set_custom_font('dejavu16x16_gs_tc.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
+        libtcod.console_set_custom_font('fonts/prestige12x12_gs_tc.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
+        #libtcod.console_set_custom_font('fonts/dejavu_wide12x12_gs_tc.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
+        #libtcod.console_set_custom_font('fonts/terminal16x16_gs_ro.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_ASCII_INROW)
 
         # Initialize root console
         libtcod.console_init_root(self.width, self.height, 'Destard', False)

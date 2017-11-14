@@ -123,8 +123,8 @@ XXXXXXX......XXXXXXX
 'layout4': '''
 XXXXXXXXXXXXXXX
 X.............X
-X.XX.......XX.X
-X.XX.......XX.X
+X..XX.....XX..X
+X..XX.....XX..X
 X.............X
 X..............
 X..............
@@ -132,8 +132,8 @@ X......b......X
 ..............X
 ..............X
 X.............X
-X.XX.......XX.X
-X.XX.......XX.X
+X..XX.....XX..X
+X..XX.....XX..X
 X.............X
 XXXXXXXXXXXXXXX
 '''
